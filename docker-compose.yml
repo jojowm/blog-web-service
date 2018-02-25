@@ -1,0 +1,31 @@
+version: "3"
+
+# data volume for MongoDB
+volumes:
+  mongostorage:
+
+services:
+  db:
+    image: mongo
+    container_name: "db"
+    env_file:
+      - ./.env
+    volumes:
+      - mongostorage:/data/db
+    ports:
+      - "${MONGODB_EXPOSED_PORT}:27017"
+    environment:
+      MONGODB_ADMIN_USER: $MONGODB_ADMIN_USER
+      MONGODB_ADMIN_PASS: $MONGODB_ADMIN_PASS
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
+
+  rest:
+    build: .
+    ports:
+      - "${REST_API_EXPOSED_PORT}:3002"
+    links:
+      - db
+    depends_on:
+      - db
