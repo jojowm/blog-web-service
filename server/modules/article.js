@@ -13,6 +13,7 @@ const articleSchema = new Schema({
   meta: {
     time: String,
     count: {
+      comment: Number,
       word: Number,
       reading: Number,
       likes: Number
