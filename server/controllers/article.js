@@ -1,4 +1,4 @@
-const Article = require('../modules/article')
+const Article = require('../models/article')
 
 class ArticleController {
   async finaAll (ctx) {

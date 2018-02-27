@@ -18,7 +18,8 @@ const articleSchema = new Schema({
       reading: Number,
       likes: Number
     }
-  }
+  },
+  content: ''
 })
 
 module.exports = mongoose.model('article', articleSchema)
