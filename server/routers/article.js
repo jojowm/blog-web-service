@@ -11,4 +11,6 @@ router.post('/', ArticleController.create)
 
 router.post('/delete/:id', ArticleController.delete)
 
+router.post('/update/:id', ArticleController.update)
+
 module.exports = router

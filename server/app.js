@@ -3,6 +3,8 @@ const logger = require('koa-logger')
 const body = require('koa-bodyparser')
 const mongoose = require('mongoose')
 
+const responseMid = require('./middlewares/response')
+
 const articleRoutes = require('./routers/article')
 
 const app = new Koa()
@@ -10,6 +12,7 @@ const app = new Koa()
 app
   .use(logger())
   .use(body())
+  .use(responseMid)
   .use(articleRoutes.routes())
 
 app.listen(3002, () => {
