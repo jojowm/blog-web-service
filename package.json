@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "blog server written by nodejs",
   "private": true,
-  "main": "server.js",
+  "main": "./server/app.js",
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "npm install && nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chris",

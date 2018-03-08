@@ -2,12 +2,8 @@ FROM node:8.9.4
 
 WORKDIR /www
 
-COPY package*.json ./
-
 RUN npm config set registry https://registry.npm.taobao.org \
-    && npm install
-
-COPY . .
+    && npm i -g nodemon
 
 EXPOSE 3002
 

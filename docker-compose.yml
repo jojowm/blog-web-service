@@ -23,6 +23,8 @@ services:
 
   rest:
     build: .
+    volumes:
+      - ./:/www
     ports:
       - "${REST_API_EXPOSED_PORT}:3002"
     links:
