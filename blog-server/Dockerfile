@@ -2,8 +2,7 @@ FROM node:8.9.4
 
 WORKDIR /www
 
-RUN npm config set registry https://registry.npm.taobao.org \
-    && npm i -g nodemon
+RUN npm config set registry https://registry.npm.taobao.org
 
 EXPOSE 3002
 
