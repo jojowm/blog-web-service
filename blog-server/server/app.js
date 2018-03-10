@@ -1,18 +1,20 @@
 const Koa = require('koa')
 const logger = require('koa-logger')
 const body = require('koa-bodyparser')
+const cors = require('koa2-cors')
 const mongoose = require('mongoose')
 
-const responseMid = require('./middlewares/response')
+const errorHandler = require('./middlewares/global-error-handler')
 
 const articleRoutes = require('./routers/article')
 
 const app = new Koa()
 
 app
+  .use(cors())
+  .use(errorHandler)
   .use(logger())
   .use(body())
-  .use(responseMid)
   .use(articleRoutes.routes())
 
 app.listen(3002, () => {
