@@ -1,7 +1,7 @@
 const Article = require('../models/article')
 
 class ArticleController {
-  async finaAll (ctx) {
+  async findAll (ctx) {
     ctx.body = await Article.find()
   }
 
@@ -9,7 +9,7 @@ class ArticleController {
     try {
       const article = await Article.findById(ctx.params.id)
       if (!article) {
-        ctx.throw('文章不存在')
+        ctx.throw({message: '文章不存在'})
       }
       ctx.body = article
     } catch (e) {

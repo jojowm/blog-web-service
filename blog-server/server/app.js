@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const errorHandler = require('./middlewares/global-error-handler')
 
 const articleRoutes = require('./routers/article')
+const userRoutes = require('./routers/user')
 
 const app = new Koa()
 
@@ -16,6 +17,7 @@ app
   .use(logger())
   .use(body())
   .use(articleRoutes.routes())
+  .use(userRoutes.routes())
 
 app.listen(3002, () => {
   console.log('Koa is running at 3002')
