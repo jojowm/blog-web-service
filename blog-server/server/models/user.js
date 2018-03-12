@@ -33,8 +33,8 @@ userSchema.pre('save', function (next) {
     if (err) {
       throw(err)
     }
-    vm.salt = salt
-    crypto.pbkdf2(vm.password, salt, 100, 64, 'sha512', function (err, derivedKey) {
+    vm.salt = salt.toString('hex')
+    crypto.pbkdf2(vm.password, vm.salt, 100, 64, 'sha512', function (err, derivedKey) {
       if (err) {
         throw(err)
       }

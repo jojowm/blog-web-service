@@ -37,9 +37,9 @@ class ArticleController {
   async delete (ctx) {
     try {
       await Article.findByIdAndRemove(ctx.params.id)
-      // ctx.body = {
-      //   status: true
-      // }
+      ctx.body = {
+        message: '删除成功'
+      }
     } catch (e) {
       ctx.throw(e)
     }

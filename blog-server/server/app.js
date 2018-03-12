@@ -2,9 +2,12 @@ const Koa = require('koa')
 const logger = require('koa-logger')
 const body = require('koa-bodyparser')
 const cors = require('koa2-cors')
+const session = require('koa-session2')
 const mongoose = require('mongoose')
 
 const errorHandler = require('./middlewares/global-error-handler')
+
+const CacheStore = require('./Store')
 
 const articleRoutes = require('./routers/article')
 const userRoutes = require('./routers/user')
@@ -15,6 +18,9 @@ app
   .use(cors())
   .use(errorHandler)
   .use(logger())
+  .use(session({
+    store: new CacheStore()
+  }))
   .use(body())
   .use(articleRoutes.routes())
   .use(userRoutes.routes())
@@ -23,7 +29,7 @@ app.listen(3002, () => {
   console.log('Koa is running at 3002')
 })
 
-const CONNECTION_STR = 'mongodb://db:27017/blog'
+const CONNECTION_STR = 'mongodb://mongodb:27017/blog'
 mongoose.connect(CONNECTION_STR, {config: {autoIndex: false}})
 mongoose.connection.on('connected', () => {
   console.log(`Mongoose connection open to ${CONNECTION_STR}`)

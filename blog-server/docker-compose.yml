@@ -5,9 +5,9 @@ volumes:
   mongostorage:
 
 services:
-  db:
+  mongodb:
     image: mongo
-    container_name: "db"
+    container_name: "blog-mongodb-database"
     env_file:
       - ./.env
     volumes:
@@ -21,13 +21,22 @@ services:
       MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
       MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
 
+  redis:
+    image: redis
+    container_name: "blog-redis-cache"
+    ports:
+      - 6379
+
   rest:
     build: .
+    container_name: "blog-server"
     volumes:
       - ./:/www
     ports:
       - "${REST_API_EXPOSED_PORT}:3002"
     links:
-      - db
+      - mongodb
+      - redis
     depends_on:
-      - db
+      - mongodb
+      - redis
