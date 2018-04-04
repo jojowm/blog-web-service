@@ -29,6 +29,9 @@ class ArticleController {
   async update (ctx) {
     try {
       await Article.findByIdAndUpdate(ctx.params.id, ctx.request.body)
+      ctx.body = {
+        message: '修改成功'
+      }
     } catch (e) {
       ctx.throw(e)
     }

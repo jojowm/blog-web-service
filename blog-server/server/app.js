@@ -5,7 +5,7 @@ const cors = require('koa2-cors')
 const session = require('koa-session2')
 const mongoose = require('mongoose')
 
-const errorHandler = require('./middlewares/global-error-handler')
+const responseHandler = require('./middlewares/global-response-handler')
 
 const CacheStore = require('./Store')
 
@@ -16,7 +16,7 @@ const app = new Koa()
 
 app
   .use(cors())
-  .use(errorHandler)
+  .use(responseHandler)
   .use(logger())
   .use(session({
     store: new CacheStore()

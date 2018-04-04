@@ -10,7 +10,9 @@ router.get('/:id', ArticleController.findById)
 router.post('/', ArticleController.create)
 
 router.post('/delete/:id', ArticleController.delete)
+// router.delete('/:id', ArticleController.delete)
 
 router.post('/update/:id', ArticleController.update)
+// router.put('/:id', ArticleController.update)
 
 module.exports = router
