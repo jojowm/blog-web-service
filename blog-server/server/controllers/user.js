@@ -36,6 +36,43 @@ class UserController {
       ctx.throw({message: '账户不存在'})
     }
   }
+
+  async getProfile (ctx) {
+    if (!ctx.session.user) {
+      ctx.throw({message: '请先登录'})
+    }
+    const {
+      nick_name,
+      bio,
+      github,
+      weibo,
+      email
+    } = ctx.session.user
+    ctx.body = {
+      nick_name,
+      bio,
+      github,
+      weibo,
+      email
+    }
+  }
+
+  async updateProfile (ctx) {
+    if (!ctx.session.user) {
+      ctx.throw({message: '请先登录'})
+    }
+    const user = ctx.session.user
+    const data = ctx.request.body
+    const userUpdated = Object.assign({}, user, data)
+    try {
+      await User.findByIdAndUpdate(user._id, userUpdated)
+      ctx.body = {
+        message: '修改成功'
+      }
+    } catch (e) {
+      ctx.throw(e)
+    }
+  }
 }
 
 module.exports = new UserController()
