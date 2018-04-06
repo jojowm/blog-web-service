@@ -37,6 +37,16 @@ class UserController {
     }
   }
 
+  async signOut (ctx) {
+    if (!ctx.session.user) {
+      ctx.throw({message: '您未登录'})
+    }
+    ctx.session.user = null
+    ctx.body = {
+      message: '登出成功'
+    }
+  }
+
   async getProfile (ctx) {
     if (!ctx.session.user) {
       ctx.throw({message: '请先登录'})
