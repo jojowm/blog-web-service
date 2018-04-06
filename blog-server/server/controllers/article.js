@@ -47,6 +47,16 @@ class ArticleController {
       ctx.throw(e)
     }
   }
+
+  async findByTitle (ctx) {
+    try {
+      const queryTitle = ctx.request.header.title || ''
+      const findArticles = await Article.find({title: queryTitle})
+      ctx.body = findArticles
+    } catch (e) {
+      ctx.throw(e)
+    }
+  }
 }
 
 module.exports = new ArticleController()
