@@ -5,12 +5,18 @@ router.prefix('/article')
 
 router.get('/list', ArticleController.findAll)
 
-router.get('/:id', ArticleController.findById)
-
 router.post('/', ArticleController.create)
 
 router.post('/delete/:id', ArticleController.delete)
+// router.delete('/:id', ArticleController.delete)
 
 router.post('/update/:id', ArticleController.update)
+// router.put('/:id', ArticleController.update)
+
+router.get('/query', ArticleController.findByTitle)
+
+router.get('/:id', ArticleController.findById)
+
+router.post('/comment/:id', ArticleController.comment)
 
 module.exports = router

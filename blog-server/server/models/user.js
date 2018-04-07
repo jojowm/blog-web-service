@@ -19,7 +19,11 @@ const userSchema = new Schema({
   bio: String, // 描述
   github: String, // GitHub地址,
   weibo: String, // 微博,
-  email: String // 电子邮箱
+  email: String, // 电子邮箱
+  tags: { // 个人标签
+    type: Array,
+    default: []
+  }
 })
 
 userSchema.pre('save', function (next) {

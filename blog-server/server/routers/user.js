@@ -6,5 +6,12 @@ router.prefix('/user')
 router.get('/list', UserController.findAll)
 router.post('/sign_up', UserController.signUp)
 router.post('/sign_in', UserController.signIn)
+router.get('/sign_out', UserController.signOut)
+
+router.get('/profile', UserController.getProfile)
+
+router.post('/profile', UserController.updateProfile)
+
+router.post('/tags', UserController.updateTags)
 
 module.exports = router
