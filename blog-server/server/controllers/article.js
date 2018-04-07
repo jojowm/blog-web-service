@@ -54,8 +54,9 @@ class ArticleController {
 
   async findByTitle (ctx) {
     try {
-      const queryTitle = ctx.request.header.title || ''
-      const findArticles = await Article.find({title: queryTitle})
+      const queryTitle = ctx.query.title || ''
+      let reg = new RegExp(queryTitle, 'i')
+      const findArticles = await Article.find({title: reg})
       ctx.body = findArticles
     } catch (e) {
       ctx.throw(e)
