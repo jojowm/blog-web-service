@@ -56,14 +56,16 @@ class UserController {
       bio,
       github,
       weibo,
-      email
+      email,
+      tags
     } = ctx.session.user
     ctx.body = {
       nick_name,
       bio,
       github,
       weibo,
-      email
+      email,
+      tags
     }
   }
 
@@ -75,7 +77,30 @@ class UserController {
     const data = ctx.request.body
     const userUpdated = Object.assign({}, user, data)
     try {
-      await User.findByIdAndUpdate(user._id, userUpdated)
+      const _user = await User.findByIdAndUpdate(user._id, userUpdated)
+      ctx.session.user = _user
+      ctx.body = {
+        message: '修改成功'
+      }
+    } catch (e) {
+      ctx.throw(e)
+    }
+  }
+
+  async updateTags (ctx) {
+    if (!ctx.session.user) {
+      ctx.throw({message: '请先登录'})
+    }
+    const userSession = ctx.session.user
+    const tags = ctx.request.body.tags
+    if (!tags || tags.length < 1) {
+      ctx.throw({message: '请传入tags'})
+    }
+    try {
+      let user = await User.findById(userSession._id)
+      user.tags = tags
+      user.save()
+      ctx.session.user = user
       ctx.body = {
         message: '修改成功'
       }

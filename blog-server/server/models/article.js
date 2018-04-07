@@ -9,7 +9,6 @@ const articleSchema = new Schema({
   },
   author: String,
   class: Array,
-  tags: Array,
   meta: {
     create_time: Date,
     update_time: Date,

@@ -12,4 +12,6 @@ router.get('/profile', UserController.getProfile)
 
 router.post('/profile', UserController.updateProfile)
 
+router.post('/tags', UserController.updateTags)
+
 module.exports = router
