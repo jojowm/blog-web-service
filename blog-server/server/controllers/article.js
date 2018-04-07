@@ -61,6 +61,26 @@ class ArticleController {
       ctx.throw(e)
     }
   }
+
+  async comment (ctx) {
+    try {
+      let article = await Article.findById(ctx.params.id)
+      const comment = ctx.request.body
+      if (!comment.email || comment.email.length < 1) {
+        ctx.throw({message: '请输入邮箱后进行评论'})
+      }
+      if (!comment.content || comment.content.length < 1) {
+        ctx.throw({message: '请输入评论内容'})
+      }
+      article.comment.push(comment)
+      article.save()
+      ctx.body = {
+        message: '评论成功'
+      }
+    } catch (e) {
+      ctx.throw(e)
+    }
+  }
 }
 
 module.exports = new ArticleController()

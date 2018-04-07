@@ -9,6 +9,10 @@ const articleSchema = new Schema({
   },
   author: String,
   class: Array,
+  comment: {
+    type: Array,
+    default: []
+  },
   meta: {
     create_time: Date,
     update_time: Date,

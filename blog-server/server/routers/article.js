@@ -17,4 +17,6 @@ router.get('/query', ArticleController.findByTitle)
 
 router.get('/:id', ArticleController.findById)
 
+router.post('/comment/:id', ArticleController.comment)
+
 module.exports = router
