@@ -11,6 +11,10 @@ class ArticleController {
       if (!article) {
         ctx.throw({message: '文章不存在'})
       }
+      if (!ctx.session.user) {
+        ++article.meta.count.reading
+        article.save()
+      }
       ctx.body = article
     } catch (e) {
       ctx.throw(e)
